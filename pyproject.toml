@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "demo-streamlit-fsl"
+version = "0.1.0"
+description = "Demonstration of the power of streamlit with an example on few shot learning"
+authors = ["Arnault Chazareix <arnaultc@sicara.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+streamlit = "^0.75.0"
+stqdm = "^0.0.3"
+Pillow = "^8.1.0"
+matplotlib = "^3.3.3"
+annoy = "^1.17.0"
+numpy = "^1.19.4"
+pandas = "^1.2.1"
+keras-fsl = "^0.2.0"
+
+
+[tool.poetry.dev-dependencies]
+black = "^20.8b1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
