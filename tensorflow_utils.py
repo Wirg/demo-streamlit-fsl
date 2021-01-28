@@ -10,7 +10,6 @@ def cosine_similary(x1, x2, axis=-1):
 
 
 def image_dataset_from_paths(image_paths: List[str]) -> tf.data.Dataset:
-    return (
-        tf.data.Dataset.from_tensor_slices(image_paths)
-        .map(lambda p: tf.image.decode_jpeg(tf.io.read_file(p)))
+    return tf.data.Dataset.from_tensor_slices(image_paths).map(
+        lambda p: tf.image.decode_jpeg(tf.io.read_file(p))
     )
