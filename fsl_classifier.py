@@ -1,6 +1,7 @@
-from typing import Callable, Optional, Tuple, List, Union
+from typing import Callable, Optional, Tuple, List, Union, Dict
 
 import numpy as np
+import pandas as pd
 import tensorflow as tf
 from keras_fsl.layers import Classification
 
@@ -23,6 +24,7 @@ class FSLClassifier:
         self.encoder = encoder
         self.head = head
         self._model: Optional[tf.keras.Model] = None
+        self._id_to_label: Optional[List[str]] = None
 
     @property
     def input_shape(self) -> Tuple[int, int, int, int]:
@@ -62,6 +64,12 @@ class FSLClassifier:
             raise ValueError("Support set was not initialized (empty)")
         return self._model
 
+    @property
+    def id_to_label(self) -> List[str]:
+        if self._id_to_label is None:
+            raise ValueError("Support set was not initialized (empty)")
+        return self._id_to_label
+
     def _to_dataset(self, images, batch_size: int = 4) -> tf.data.Dataset:
         if not isinstance(images, tf.data.Dataset):
             images = tf.data.Dataset.from_tensor_slices(images)
@@ -71,12 +79,22 @@ class FSLClassifier:
         return self.encoder.predict(self._to_dataset(images, batch_size))
 
     def set_catalog(self, images, labels: List[str], batch_size: int = 4):
+        self._id_to_label = list(set(labels))
         self._model = self.build_model(
             self.predict_embeddings(images, batch_size), labels
         )
 
     def predict(self, images, batch_size: int = 4) -> tf.Tensor:
         return self.model.predict(self._to_dataset(images, batch_size))
+
+    def predictions_to_classes(self, predictions: tf.Tensor, best=True) -> pd.DataFrame:
+        if best:
+            print(predictions.argmax(-1).shape)
+            print(predictions.max(-1).shape)
+            return pd.DataFrame(
+                {"class_id": predictions.argmax(-1), "score": predictions.max(-1)}
+            ).assign(label=lambda df: df.class_id.map(self.id_to_label.__getitem__))
+        return pd.DataFrame(predictions, columns=self.id_to_label)
 
     @classmethod
     def example(cls):
