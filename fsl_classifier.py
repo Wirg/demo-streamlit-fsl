@@ -1,7 +1,7 @@
 from typing import Callable, Optional, Tuple, List, Union
 
-import tensorflow as tf
 import numpy as np
+import tensorflow as tf
 from keras_fsl.layers import Classification
 
 from tensorflow_utils import cosine_similary
