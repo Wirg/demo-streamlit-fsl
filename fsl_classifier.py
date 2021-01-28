@@ -89,8 +89,6 @@ class FSLClassifier:
 
     def predictions_to_classes(self, predictions: tf.Tensor, best=True) -> pd.DataFrame:
         if best:
-            print(predictions.argmax(-1).shape)
-            print(predictions.max(-1).shape)
             return pd.DataFrame(
                 {"class_id": predictions.argmax(-1), "score": predictions.max(-1)}
             ).assign(label=lambda df: df.class_id.map(self.id_to_label.__getitem__))
