@@ -79,7 +79,9 @@ class FSLClassifier:
         return self.encoder.predict(self._to_dataset(images, batch_size))
 
     def set_catalog(self, images, labels: List[str], batch_size: int = 4):
-        self._id_to_label = list(set(labels))
+        self._id_to_label = [
+            str(tensor) for tensor in tf.unique(labels)[0].numpy().astype(str)
+        ]
         self._model = self.build_model(
             self.predict_embeddings(images, batch_size), labels
         )
