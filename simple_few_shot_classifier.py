@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from fsl_classifier import FSLClassifier
-from tensorflow_utils import image_dataset_from_paths
+from core.fsl_classifier import FSLClassifier
+from core.tensorflow_utils import image_dataset_from_paths
 
 fsl_classifier = FSLClassifier.example()
 

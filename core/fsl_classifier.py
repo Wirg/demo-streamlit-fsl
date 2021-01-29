@@ -1,11 +1,11 @@
-from typing import Callable, Optional, Tuple, List, Union, Dict
+from typing import Callable, Optional, Tuple, List, Union
 
 import numpy as np
 import pandas as pd
 import tensorflow as tf
 from keras_fsl.layers import Classification
 
-from tensorflow_utils import cosine_similary
+from core.tensorflow_utils import cosine_similary
 
 IMAGE_INPUTS = Union[
     tf.data.Dataset, List[tf.Tensor], List[np.array], np.array, tf.Tensor

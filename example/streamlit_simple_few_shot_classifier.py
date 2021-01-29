@@ -6,7 +6,7 @@ from example.streamlit_utils import (
     columns_display,
     get_fsl_classifier_from_catalog_dataframe,
 )
-from tensorflow_utils import image_dataset_from_paths
+from core.tensorflow_utils import image_dataset_from_paths
 
 catalog = labeled_image_dataframe_from_folder(Path("data/default_catalog"))
 

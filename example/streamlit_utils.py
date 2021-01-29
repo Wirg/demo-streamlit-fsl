@@ -4,8 +4,8 @@ from typing import Tuple, List
 import pandas as pd
 import streamlit as st
 
-from fsl_classifier import FSLClassifier
-from tensorflow_utils import image_dataset_from_paths
+from core.fsl_classifier import FSLClassifier
+from core.tensorflow_utils import image_dataset_from_paths
 
 
 @st.cache(allow_output_mutation=True)

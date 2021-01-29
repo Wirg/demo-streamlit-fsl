@@ -8,7 +8,7 @@ from example.streamlit_utils import (
     get_fsl_classifier_from_catalog_dataframe,
     write_to_disk,
 )
-from tensorflow_utils import image_dataset_from_paths
+from core.tensorflow_utils import image_dataset_from_paths
 
 catalog = labeled_image_dataframe_from_folder(Path("data/default_catalog"))
 

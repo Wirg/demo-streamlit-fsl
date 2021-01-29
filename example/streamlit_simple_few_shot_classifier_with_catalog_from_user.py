@@ -4,12 +4,11 @@ import pandas as pd
 import streamlit as st
 
 from example.streamlit_utils import (
-    labeled_image_dataframe_from_folder,
     columns_display,
     get_fsl_classifier_from_catalog_dataframe,
     write_to_disk,
 )
-from tensorflow_utils import image_dataset_from_paths
+from core.tensorflow_utils import image_dataset_from_paths
 
 log_folder = Path("data/log")
 log_folder.mkdir(exist_ok=True)
