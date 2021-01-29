@@ -1,7 +1,10 @@
+import sys
 from pathlib import Path
 
 import pandas as pd
 import streamlit as st
+
+sys.path.append(__file__.rsplit("/", 2)[0])
 
 from example.streamlit_utils import (
     columns_display,
