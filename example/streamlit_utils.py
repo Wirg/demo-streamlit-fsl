@@ -38,3 +38,16 @@ def columns_display(path_label_list: List[Tuple[str, str]], n_columns: int = 4):
                 image_path, prediction = path_label_list[i + k]
                 with columns[k]:
                     st.image(image_path, caption=prediction, use_column_width=True)
+
+
+@st.cache
+def write_file_to_disk(file, log_folder: Path) -> str:
+    log_file_path = str(log_folder / file.name)
+    with open(log_file_path, "wb") as f:
+        f.write(file.read())
+    return log_file_path
+
+
+@st.cache
+def write_to_disk(files, log_folder: Path) -> List[str]:
+    return [write_file_to_disk(file, log_folder) for file in files]
